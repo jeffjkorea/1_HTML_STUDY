@@ -1,5 +1,3 @@
-[x] basic html structure
-
 # Basic html structure
 
 ## doctype
