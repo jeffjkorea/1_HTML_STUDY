@@ -635,3 +635,62 @@ The cat was playing in the garden.</textarea
 ### input formnovalidate
 
 - 해당속성은 특정 인풋태그의 novalidate 속성을 재정의합니다.
+
+# HTTP란?
+
+
+- 클라이언트와 서버간의 통신을 규약한것입니다.
+- HTTP는 클라이언트와 서버간의 요청-응답 프로토콜로 작동합니다.
+- 클라이언트가 서버에 HTTP 요청을합니다. 그러면 서버는 클라이언트에게 응답합니다. 응답에는 요청에대한 상태정보(STATUS INFORMATION)가 포함되며 또한 요청된 콘텐츠도 포함될수도 있습니다.
+
+# HTTP METHODS
+https://www.w3schools.com/tags/ref_httpmethods.asp
+
+## GET
+
+- 지정된 리소스에서 데이터를 요청하는데 사용됩니다.
+- 쿼리문자열(이름/값) 은 GET요청의 URL속에서 전송됩니다.
+    - /test/demo_form.php?name1=value1&name2=value2
+- GET요청은 캐시할수있습니다.  GET requests can be cached
+- GET요청은 브라우저기록에 남습니다.
+- GET요청은 북마크에 추가할수있습니다.
+- 민감한 데이터는 GET요청하면 안됩니다.
+- GET요청은 길이제한이 있습니다.
+- GET요청은 데이터 요청에만 사용됩니다 (수정불가)
+
+## POST
+
+- 리소스를 생성, 업데이트위해 서버에 데이터를 보낼때 사용됩니다.
+- POST를 통해 서버로 전송된 데이터는 HTTP REQUEST의 HTTP REQUEST BODY안에 저장됩니다.
+
+    POST `/test/demo_form.php HTTP/1.1`
+
+    Host: `w3schools.com`
+
+    `name1=value1&name2=value2`
+
+- POST요청은 캐시되지않습니다.  POST requests are never cached
+- 브라우저 기록에 남지않습니다.
+- 북마크 할수없습니다.
+- 데이터길이에 대한 제한이 없습니다.
+
+## PUT
+
+- PUT은 리소스를 생성/업데이트하기 위해 서버에 데이터를 보내는 데 사용됩니다.
+- POST와 PUT의 차이점은 PUT 요청이 멱등적(IDEMPOTENT)이라는 것입니다. 즉, 동일한 PUT 요청을 여러 번 호출하면 항상 동일한 결과가 생성됩니다.
+- 반대로 POST 요청을 반복적으로 호출하면 동일한 리소스를 여러 번 생성하는 부작용이 있습니다.
+
+## HEAD
+
+- HEAD는 GET과 거의 동일하지만 응답 본문(response body)이 없습니다.
+- 즉, GET방식을쓰면 /users가 사용자 목록을 반환한다면 HEAD방식은 /users는 동일한 요청을 수행하지만 사용자 목록은 반환하지 않습니다.
+
+## DELETE
+
+- DELETE 메소드는 지정된 자원을 삭제합니다.
+
+## OPTIONS
+
+- OPTIONS 메서드는 대상 리소스에 대한 통신 옵션을 설명합니다.
+
+
