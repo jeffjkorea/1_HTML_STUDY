@@ -1,49 +1,152 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
- <title>text</title>
 </head>
 <body>
- <h1>list style</h1>
- <ul style="list-style-type:disc;">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ul>
-<ol type="A" >
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ol>
-<ol start="50">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ol>
-<ul>
-  <li>Coffee</li>
-  <li>Tea
-    <ul>
-      <li>Black tea</li>
-      <li>Green tea</li>
-    </ul>
-  </li>
-  <li>Milk</li>
-</ul>
+  <table style="width:100%;" border="1">
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+  </table>
+  
+  <p>border semantic -thead, tbody, tfoot</p>
+  <table border="2">
+    <thead>
+        <tr>
+            <th>이름</th>     <th>성별</th>   <th>주소</th> <th>회비</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>최진혁</td>  <td>남</td>      <td >청주</td> <td>1000</td>
+        </tr>
+        <tr>
+            <td>최유빈</td>  <td>여</td>      <td>청주</td> <td>500</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>합계</td>  <td></td>      <td></td> <td>1500</td>
+        </tr>
+    </tfoot>
+</table>
+<p>border style & border collapse</p>
+<table style="border: 1px solid grey;border-collapse: collapse;">
+  <tr>
+    <th style="border: 1px solid grey;">title</th>
+    <th style="border: 1px solid grey;">description</th>
+  </tr>
+  <tr>
+    <td style="border: 1px solid grey;">1</td>
+    <td style="border: 1px solid grey;">1</td>
+  </tr>
+</table>
 
-<ul style="overflow: hidden; list-style-type: none;">
-  <li style="float: left; padding: 10px;"><a href="#home">Home</a></li>
-  <li style="float: left;padding: 10px;"><a href="#news">News</a></li>
-  <li style="float: left;padding: 10px;"><a href="#contact">Contact</a></li>
-  <li style="float: left;padding: 10px;"><a href="#about">About</a></li>
-</ul>
+<p> border spacing</p>
+<table style="width:100%; border-spacing: 10px;" border="2">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+</table>
 
-<dl>
-  <dt>Coffee selection</dt>
-  <dd>black hot drink</dd>
-  <dt>Milk selection</dt>
-  <dd>white cold drink</dd>
-</dl>
+
+<p>cell split - th & colspan, rowspan</p>
+<table style="width:100%" border="2">
+  <tr>
+    <th>Name</th>
+    <th colspan="2">Telephone</th>
+  </tr>
+  <tr>
+    <td>Bill Gates</td>
+    <td>55577854</td>
+    <td>55577855</td>
+  </tr>
+  <tr>
+    <td>Bill Gates</td>
+    <td></td>
+    <td>55577855</td>
+  </tr>
+</table>
+
+<p>cell merge - td & colspan, rowspan</p>
+<table border="2">
+  <thead>
+      <tr>
+          <th>이름</th>     <th>성별</th>   <th>주소</th> <th>회비</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>최진혁</td>  <td>남</td>      <td rowspan="2">청주</td> <td>1000</td>
+      </tr>
+      <tr>
+          <td>최유빈</td>  <td>여</td>      <td>500</td>
+      </tr>
+  </tbody>
+  <tfoot>
+      <tr>
+          <td colspan="3">합계</td>      <td>1500</td>
+      </tr>
+  </tfoot>
+
+</table>
+<p>colgroup & col</p>
+<table border=2>
+  <colgroup>
+    <col span="2" style="background-color:red">
+    <col style="background-color:yellow">
+  </colgroup>
+  <tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Price</th>
+  </tr>
+  <tr>
+    <td>3476896</td>
+    <td>My first HTML</td>
+    <td>$53</td>
+  </tr>
+</table>
+<p>caption</p>
+<table style="width:100%" border=2>
+  <caption>Monthly savings</caption>
+  <tr>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>February</td>
+    <td>$50</td>
+  </tr>
+</table>
 
 </body>
 </html>
