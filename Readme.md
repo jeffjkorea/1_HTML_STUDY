@@ -1,148 +1,315 @@
-https://www.w3schools.com/html/html_images.asp
+https://www.w3schools.com/html/html5_canvas.asp
 
-# img
+# 웹페이지위에 그래픽을 그릴때 사용한다.
+
+- 자바스크립트를 통해 즉석에서 그래픽을 그리는데 사용됩니다.
+- 캔버스는 그래픽을위한 컨테이너일뿐입니다. 실제 그래픽을 그리기위해서는 자바스크립트를 이용해야합니다.
+- 캔버스에서 PATH, BOX, CIRCLE, TEXT를 그리는 방법과 이미지추가하는 방법이 여러가지 있습니다.
+
+## CREATE CANVAS
+
+- 캔버스는 HTML 페이지에 직사각형영역입니다.
+- 기본값으로 경계선없고, 안에 컨텐츠도 없습니다.
+- 항상 ID값을 지정(스크립트에서 참조됨)하고, 너비와 높이를 지정해야합니다.
 
 ```html
-<img src="http://....." alt="tree"  style="width:48px;height:48px;>
+<canvas
+  id="myCanvas"
+  width="200"
+  height="100"
+  style="border:1px solid #000000;"
+>
+</canvas>
 ```
 
-- src : 주소
-- alt : 대체텍스트(이미지가 안나올경우)
-- width, height : 이미지의 크기지정
+## Add javascripts - 그림그리기
 
-## Common Image Formats
+- 자바스크립트를 추가해서 그림을 그립니다.
+- 첫번째로 캔버스 엘리먼트를 가져와 변수에 담습니다.
+- 두번째로, 드로윙객체를 생성합니다. getContext() 메써드는 그리기를 위한 속성과 메써드가 내장된 HTML 객체입니다.
+- 세번째로 그리기객체를 이용해 그림을 그립니다.
 
-Here are the most common image file types, which are supported in all browsers (Chrome, Edge, Firefox, Safari, Opera):
+  - 캔버스 좌표
+    - 캔버스는 2차원 그리드입니다. 왼쪽 상단은 좌표가 0,0 입니다.
+  - 그리기 객체의 속성 및 메써드
 
-| Abbreviation | File Format                           | File Extension                   |
-| ------------ | ------------------------------------- | -------------------------------- |
-| APNG         | Animated Portable Network Graphics    | .apng                            |
-| GIF          | Graphics Interchange Format           | .gif                             |
-| ICO          | Microsoft Icon                        | .ico, .cur                       |
-| JPEG         | Joint Photographic Expert Group image | .jpg, .jpeg, .jfif, .pjpeg, .pjp |
-| PNG          | Portable Network Graphics             | .png                             |
-| SVG          | Scalable Vector Graphics              | .svg                             |
+    - 사각형그리기
+      - ctx.fillStyle = "#FF0000"; 채울 색상 설정, fillstyle속성은 그라이던트 또는 패턴일수도 있습니다.
+      - ctx.fillRect(0, 0, 150, 75); fillRect(x,y,width,height) 채우기스타일로 채워진 사각형을 그립니다.
+    - 선그리기
+      - moveTo(x,y) - defines the starting point of the line (선의 시작점을 정의합니다)
+      - lineTo(x,y) - defines the ending point of the line (선의 끝점을 정의합니다)
+      - stroke() - 실제로 선을 그리려면, stroke()와같은 잉크 메써드중 하나를 사용하여야합니다.
+    - 원그리기
+      - beginPath() - 패스 영역을 선언
+      - arc(x,y,r,startangle,endangle) : x,y는 원의 중심점, r은 반지름, 시작각도, 끝나는각도.
+        - 각도는 라디안단위로 작성해야합니다 360도 = 2\*pi 라디안
+    - 그라디언트
+      - 그라디언트생성 - 그라디언트는 색을 채우는데 사용할수있습니다.
+        - createLinearGradient(x,y,x1,y1) - creates a linear gradient (그라디언트의 방향지정 x,y에서 → x1,y1으로 가는)
+        - createRadialGradient(x,y,r,x1,y1,r1) - creates a radial/circular gradient
+      - 정지점추가 - 그라디언트객체는 2개이상의 정지점을 추가해야합니다.
+        - addColorStop() - 색상정지점과 색상을 지정합니다. 그라디언트위치는 0과 1사이 일수 있습니다.
+        - grd.addColorStop(0, "red"); 위치0(시작점)에서 red로 시작해서
+        - grd.addColorStop(1, "white"); 위치1(끝점)에서 흰색으로 끝나는 그라디언트.
+      - 그라디언트를 사용하려면 fillstyle 또는 stroke 스타일 속성을 그라디언트로 설정한다음, 모앙(사각,텍스트, 선)을 그립니다.
+    - 텍스트 그리기
 
-## background 이미지 (css)
+      - font - 텍스트의 글꼴속성을 정의합니다
+      - fillText(text,x,y) 캔버스에 텍스트를 그립니다.
+      - strokeText(text,x,y) . 캔버스에 텍스트를 그립니다(채우기없음)
+      - 텍스트는 좌측하단을 기준 좌표점으로 사용합니다.
 
-- 배경이미지를 가져오세요
-  - `background-image : url('xxxxxx');`
-- 배경의 반복을 조절하고싶다면? `background-repeat`
-  - 배경이미지가 element보다 작을때는 요소끝에 도착할때까지 기본적으로,가로,세로로 반복됩니다.
-  - `background-repeat: no-repeat;`
-  - `background-repeat: x-repeat;`
-  - `background-repeat: y-repeat;`
-- 배경이미지가 원래비율을유지한채, 요소를 꽉 채우고싶다면
-  - `background-size: cover`
-  - `background-attachment: fixed;`
-- 배경이미지가 원래의 비율을 포기한채, 요소를 꽉채우고싶다면, (이미지늘어짐)
-  - `background-size: 100% 100%;`
-  - `background-attachment: fixed;`
+    - 이미지추가
+      - drawImage(image,x,y) : 이미지를담은변수, x,y → 이미지삽입좌표(좌측상단을 기준점으로 사용합니다.)
 
-# img & map & area
+- 그려보기
 
-- 이미지 맵을 통해서, 이미지에 클릭가능한 영역을 생성할수있습니다.
-- 이미지 맵의 기본개념은 클릭하는 위치에 따라서 다른 작업을 수행할수 있어야 한다는것이다
-- 이미지 맵을 만들려면 이미지와, 클릭가능한영역을 설명하는 HTML코드가 필요하다.
+  - 직선그리기
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    ctx.moveTo(0, 0); ctx.lineTo(200, 100); ctx.stroke();
+  </script>
+  ```
+
+  - 원그리기
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    ctx.beginPath(); ctx.arc(95, 50, 40, 0, 2 * Math.PI); ctx.stroke();
+  </script>
+  ```
+
+  - 텍스트 그리기
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    ctx.font = "30px Arial"; ctx.fillText("Hello World", 10, 50);
+  </script>
+  ```
+
+  - Stroke text
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    ctx.font = "30px Arial"; ctx.strokeText("Hello World", 10, 50);
+  </script>
+  ```
+
+  - 그라디언트 그리기
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    // Create gradient var grd = ctx.createLinearGradient(0, 0, 200, 0);
+    grd.addColorStop(0, "red"); grd.addColorStop(1, "white"); // Fill with
+    gradient ctx.fillStyle = grd; ctx.fillRect(10, 10, 150, 80);
+  </script>
+  ```
+
+  - draw circular gradient
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    // Create gradient var grd = ctx.createRadialGradient(75, 50, 5, 90, 60,
+    100); grd.addColorStop(0, "red"); grd.addColorStop(1, "white"); // Fill with
+    gradient ctx.fillStyle = grd; ctx.fillRect(10, 10, 150, 80);
+  </script>
+  ```
+
+  - 이미지 추가하기
+
+  ```jsx
+  <script>
+    var c = document.getElementById("myCanvas"); var ctx = c.getContext("2d");
+    var img = document.getElementById("scream"); ctx.drawImage(img, 10, 10);
+  </script>
+  ```
+
+# Canvas Object Reference
+
+[https://www.w3schools.com/graphics/canvas_reference.asp](https://www.w3schools.com/graphics/canvas_reference.asp)
+
+- Colors, Styles, and Shadows
+- Line Styles
+- Rectangles Paths Transformations
+- Text
+- Image Drawing Pixel Manipulation
+- Compositing
+- Other
+
+# canvas expample - 움직이는 시계만들기
+
+https://www.w3schools.com/graphics/canvas_clock_start.asp
+
+# Create the Canvas
+
+- 캔버스 Element생성, 캔버스배경은 검정색으로합니다
+- 캔버스 객체생성
+- 2d 그리기 객체생성
+- 반지름 계산
+- 그리기 객체를 원점좌표를 캔버스 중앙으로 옮김니다.
+- 반지름을 90% 줄입니다.
+- 원을 그립니다. 원은 흰색으로 채웁니다.
 
 ```html
-<img src="workplace.jpg" alt="Workplace" usemap="#workmap" />
-
-<map name="workmap">
-  <area
-    shape="rect"
-    coords="34,44,270,350"
-    alt="Computer"
-    href="computer.htm"
-  />
-  <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm" />
-  <area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm" />
-</map>
-```
-
-## 이미지생성
-
-```html
-<img src="workplace.jpg" alt="Workplace" usemap="#workmap" />
-```
-
-- 이미지를 만들고, 이미지와 이미지맵을 연결하기위해 usemap 속성을 이용합니다.
-- usemap의 값은 해시태그로 시작하고, 이미지맵의 이름을 넣습니다.
-
-## 이미지맵생성
-
-```html
-<map name="workmap"> </map>
-```
-
-- 이미지 맵을 만드는데 사용되며, name속성에 이름을 적어줍니다. 이름을 통해 이미지와 연결합니다.
-
-## 이미지 영역
-
-- 이미지영역은 클릭가능한 영역을 추가하는것입니다
-- 클릭가능한 영역의 모양을 정의해야합니다.
-  - `rect` - defines a rectangular region
-  - `circle` - defines a circular region
-  - `poly` - defines a polygonal region 다각형
-  - `default` - defines the entire region 전체지역을 정의
-- 또한 클릭가능한 영역을 이미지에 배치할수있도록 좌표를 설정해야합니다.
-
-  - 사각형영역 - 좌측좌표, 우측좌표
-
-    - 사격형영역은, x축과 y축에 대한 좌표가 쌍으로 옵니다. 따라서 좌표 33,44는 왼쪽에서 우측으로 33픽셀, 위에서 아래쪽으로 44픽셀에 위치합니다.
-      ```html
-      <area shape="rect" coords="34, 44, 270, 350" href="computer.htm" />
-      ```
-
-  - 원영역 - 중심좌표, 반지름
-
-    - 원영역은 중심좌표와, 반지름을 통해서 영역을 설정합니다.
-
-    ```html
-    <area shape="circle" coords="337, 300, 44" href="coffee.htm" />
-    ```
-
-  - 다각형
-    - 다각형을 만드는 여러 x,y 좌표점으로 영역을 만듭니다.
-
-## 이미지맵과 자바스크립트
-
-- 요소에 클릭이벤트를 추가해 자바스크립트 기능을 실행합니다.
-
-```html
-<map name="workmap">
-  <area
-    shape="circle"
-    coords="337,300,44"
-    href="coffee.htm"
-    onclick="myFunction()"
-  />
-</map>
+<canvas id="canvas" width="400" height="400" style="background-color:#333">
+</canvas>
 
 <script>
-  function myFunction() {
-    alert("You clicked the coffee cup!");
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  var radius = canvas.height / 2;
+  ctx.translate(radius, radius);
+  radius = radius * 0.9;
+
+  function drawClock() {
+    ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = "white";
+    ctx.fill();
   }
 </script>
 ```
 
-# img & picture & source
+# CLOCK FACE drawing
 
-- 다양한장치 또는 화면크기에대해 다른그림을 표시할수있다.
-- PICTURE는 개발자가 이미지소스를 유연하게 지정할수있도록합니다
-- PICTURE는 하나이상의 SOURCE를 포함하며, 각각의 SOURCE는 SRCSET속성을 통해 다른이미지를 참조합니다.
-- SOURCE는 이미지가 적합한 시기를 정의하는 미디어 속성이 있습니다.
-- 항상 IMG 를 마지막에 추가하세요. IMG는 PICTURE를 지원하지않거나 일치하는 SOURCE MATCH가 없는경우 사용됩니다.
+- drawFace함수를 생성합니다.
+- 흰색 원을 생성합니다
+- 원형그라디언트를 생성합니다( 반지름의 95% ~ 105% 영역에 생성합니다.
+- 그라디언트의 정지점을 만들어줍니다 (시작점 검정, 가운데 흰색, 끝부분 검정)
+- 그라디언트를 드로윙객체의 스트로크스타일로 지정합니다.
+- 드로윙객체의 선폭을 반지름의 10%로 설정합니다.
+- 원을 그립니다.
 
-```html
-<picture>
-  <source media="(min-width: 650px)" srcset="img_food.jpg" />
-  <source media="(min-width: 465px)" srcset="img_car.jpg" />
-  <img src="img_girl.jpg" />
-</picture>
+```jsx
+function drawClock() {
+  drawFace(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = "white";
+  ctx.fill();
+
+  grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+  grad.addColorStop(0, "#333");
+  grad.addColorStop(0.5, "white");
+  grad.addColorStop(1, "#333");
+
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius * 0.1;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+  ctx.fillStyle = "#333";
+  ctx.fill();
+}
 ```
 
-## PICTURE를 사용하는 2가지 목적
+# 시계에 숫자를 그려봅시다
 
-- 화면이 작거나 기기가 작은경우 다른 이미지 파일을 로드할 필요가 있습니다
-- 일부브러우저 또는 장치가 모든 이미지 형식을 지원하지 않을수가 있습니다.
+- 숫자그리기 함수를 생성합니다.
+- 그리기객체의 글꼴크기를 반지름의 15% 설정합니다.
+- 텍스트정렬을 프린트위치의 center와 base라인으로 설정합니다.
+- 12개의숫자의 프린트위치를 계산합니다 (반경 85%지점에서, 30'마다 숫자가 한번씩 표시됩니다)
+
+```jsx
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius * 0.15 + "px arial";
+
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+
+  for (num = 1; num < 13; num++) {
+    ang = (num * Math.PI) / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius * 0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius * 0.85);
+    ctx.rotate(-ang);
+  }
+}
+```
+
+# 시계초침 그리기
+
+- 데이트객체를 생성해서, 시간, 분, 초를 변수에 담습니다.
+- 시침의 각도를 계산하고 길이와 너비를 그립니다 (길이=반지름의 50%) (너비 반지름의 7%)
+
+```jsx
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawTime(ctx, radius) {
+  var now = new Date();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+  //hour
+  hour = hour % 12;
+  hour =
+    (hour * Math.PI) / 6 +
+    (minute * Math.PI) / (6 * 60) +
+    (second * Math.PI) / (360 * 60);
+  drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+  //minute
+  minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
+  drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+  // second
+  second = (second * Math.PI) / 30;
+  drawHand(ctx, second, radius * 0.9, radius * 0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+  ctx.beginPath();
+  ctx.lineWidth = width;
+  ctx.lineCap = "round";
+  ctx.moveTo(0, 0);
+  ctx.rotate(pos);
+  ctx.lineTo(0, -length);
+  ctx.stroke();
+  ctx.rotate(-pos);
+}
+```
+
+# 시계작동시키기
+
+- 시계를 작동시키려면 drawclock함수를 intervals(간격)을 설정해 호출하면 됩니다.
+
+```jsx
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.9;
+
+//drawClock();
+setInterval(drawClock, 1000);
+```
+
+## more example
+
+https://www.w3schools.com/graphics/game_intro.asp
