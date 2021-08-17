@@ -1,71 +1,50 @@
-https://www.w3schools.com/html/html5_draganddrop.asp
+https://www.w3schools.com/html/html5_webstorage.asp
 
-# 요소를 드래그 가능하게 만들기
+**HTML 웹 스토리지; 쿠키보다 낫다.**
 
-- 우선: 요소를 드래그 가능하게 만들려면 draggable속성을 true로 설정하십시오 .
-- `<img draggable="true">`
+# HTML 웹 스토리지란
 
-# 드래그 가능한 요소를 끌때 발생하는 작업지정
+- 웹 스토리지를 사용하면 웹 애플리케이션이 사용자의 브라우저 내에서 로컬로 데이터를 저장할 수 있습니다.
 
-- ondragstart속성은 드래그할 데이터를 지정하는 함수 drag(event)를 호출합니다.
-- dataTransfer.setData()메서드는 끌어온 데이터의 데이터 유형과 값을 설정
-- `function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }`
+- HTML5 이전에는 애플리케이션 데이터가 모든 서버 요청에 포함된 쿠키에 저장되어야 했습니다.
+- 웹 저장소는 더 안전하며 웹 사이트 성능에 영향을 주지 않고 많은 양의 데이터를 로컬에 저장할 수 있습니다.
+- 쿠키와 달리 저장 한도가 훨씬 더 크고(최소 5MB) 정보가 서버로 전송되지 않습니다.
+- 웹 저장소는 원본(도메인 및 프로토콜당)별로 제공됩니다. 한 출처의 모든 페이지는 동일한 데이터를 저장하고 액세스할 수 있습니다.
 
-# 드롭가능한 위치지정 - ondragover
+# HTML 웹 스토리지 객체
 
-- ondragover event는 드래그된 데이터를 어디에 떨궈줄수 있는지 지정한다.
-- 기본값으로, 데이터나 elememts는 다른 element에 dropped가 가능하지않습니다.
-- 이것을 허용하기위해서는 element의 기본처리를 prevent해야합니다.
-- `event.preventDefault()`
+- HTML 웹 저장소는 클라이언트에 데이터를 저장하기 위한 두 가지 개체를 제공합니다.
 
-# Do the drop - ondrop
+- `window.localStorage` - 만료 날짜 없이 데이터를 저장합니다.
+- `window.sessionStorage` - 한 세션에 대한 데이터를 저장합니다(브라우저 탭을 닫으면 데이터가 손실됨).
 
-- 드롭하면 드롭이벤트가 발생합니다.
-- ondrop속성은 함수 drop(event)를 호출합니다.
+# local storage
+
+- localStorage 객체는 만료 날짜 없이 데이터를 저장합니다. 데이터는 브라우저를 닫아도 삭제되지 않으며 다음 날, 주 또는 연도에 사용할 수 있습니다.
+
+## 데이터 저장, 불러오기
 
 ```js
-function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
+// Store
+localStorage.setItem("lastname", "Smith");
+
+// Retrieve
+document.getElementById("result").innerHTML = localStorage.getItem("lastname");
 ```
 
-- 데이터의 브라우저 기본처리를 방지하세요(기본값은 드롭시 링크로 열러있다)
-- dataTransfer.getData() 메써드로 드래그한 데이터를 가져옵니다. 이 메써드는 setData() 메써드에서 동일유형으로 설정된 모든 데이터를 반환합니다.
-- 끌어온 데이터는 id값이 drag1인 요소입니다.
-- 끌어온 element를 drop한 element에 추가
+- 다음과 같이 작성도가능합니다
 
-# full example
-
-```html
-<head>
-  <script>
-    function allowDrop(ev) {
-      ev.preventDefault();
-    }
-
-    function drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-    }
-
-    function drop(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
-    }
-  </script>
-</head>
-<body>
-  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-
-  <img
-    id="drag1"
-    src="img_logo.gif"
-    draggable="true"
-    ondragstart="drag(event)"
-    width="336"
-    height="69"
-  />
-</body>
+```js
+// Store
+localStorage.lastname = "Smith";
+// Retrieve
+document.getElementById("result").innerHTML = localStorage.lastname;
 ```
+
+## 데이터 지우기
+
+- `localStorage.removeItem("lastname");`
+
+# ssessionStorage 객체
+
+- 사용자가 특정 브라우저 탭을 닫으면 데이터가 삭제됩니다.
