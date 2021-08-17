@@ -117,3 +117,66 @@ Your browser does not support the audio element.
 ## html audio dom reference
 
 [https://www.w3schools.com/tags/ref_av_dom.asp](https://www.w3schools.com/tags/ref_av_dom.asp)
+
+# 유투브비디오 넣기
+
+# 동영상을 재생하는 가장쉬운방법은 유투브사용
+
+- 비디오를 웹에맞게 형식변환하는것은 시간도 많이걸리고 번거롭습니다.
+- 쉬운방법은 유투브를 통해서 웹페이지에 비디오를 재생시키는 것입니다.
+
+# 유투브 비디오 ID
+
+- 유투브는 동영상을 저장또는 재생할때 ID를 표시합니다. (tgbNymZ7vqY)
+- 이 ID를 사용하고 HTML코드에서 동영상을 참조할수있습니다.
+
+# 웹페이지에서 유투브비디오 재생하기
+
+- Upload the video to YouTube (유투브에 비디오 업로드)
+- Take a note of the video id (비디오ID기억, )
+- Define an `<iframe>` element in your web page (IFRAME을 통해 동영상재생공간만들기)
+- Let the `src` attribute point to the video URL (SRC속성을통해 URL로 비디오 연결)
+- Use the `width` and `height` attributes to specify the dimension of the player (폭과, 높이를 설정해서 플레이어의 크기지정)
+- Add any other parameters to the URL (see below) (URL에 다른 매개변수을 추가합니다.)
+
+```jsx
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY"
+></iframe>
+```
+
+# OTHER PARAMETERS TO THE URL (속성설정)
+
+- controls=0 플레이어 컨트롤 나타나지않음, constrols=1 플레이어 컨트롤 나타남 (기본값)
+- mute=1 after autoplay=1
+
+```jsx
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1"
+></iframe>
+```
+
+- PLAYLIST
+  - playlist parameter에 콤마로 동영상의 ID값을 추가해서 리스트를 만듭니다
+
+```jsx
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1&playlist=tgbNymZ7vqY,tgbNymZ7vqY"
+></iframe>
+```
+
+- loop=1 (무한반복) LOOP=0 (한번만재생)
+
+```jsx
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY&loop=1"
+></iframe>
+```
